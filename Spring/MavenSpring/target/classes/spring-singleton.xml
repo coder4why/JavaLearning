@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--    Spring bean创建的对象默认为单例对象-->
+<!--    使用scope属性，设置bean创建的对象是否为单例对象:
+            默认值为singleton(创建单例);
+            prototype:每次创建一个新对象
+-->
+    <bean id="animal" class="www.spring.Entity.Animal" scope="prototype">
+        <property name="age" value="30"></property>
+        <property name="bornDate" value="2020/10/10 12:00:00"></property>
+        <property name="name" value="大疆无人机"></property>
+    </bean>
+
+</beans>

@@ -1,0 +1,32 @@
+{
+  "groups": [
+    {
+      "name": "jdbc",
+      "type": "www.mall.DbConfig.DbProperties",
+      "sourceType": "www.mall.DbConfig.DbProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "jdbc.driver",
+      "type": "java.lang.String",
+      "sourceType": "www.mall.DbConfig.DbProperties"
+    },
+    {
+      "name": "jdbc.password",
+      "type": "java.lang.String",
+      "sourceType": "www.mall.DbConfig.DbProperties"
+    },
+    {
+      "name": "jdbc.url",
+      "type": "java.lang.String",
+      "sourceType": "www.mall.DbConfig.DbProperties"
+    },
+    {
+      "name": "jdbc.username",
+      "type": "java.lang.String",
+      "sourceType": "www.mall.DbConfig.DbProperties"
+    }
+  ],
+  "hints": []
+}

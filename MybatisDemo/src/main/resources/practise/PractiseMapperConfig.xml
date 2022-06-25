@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+<!--    引用外部属性-->
+    <properties resource="./practise/practiseJDBC.properties"></properties>
+
+<!--    使用别名-->
+    <typeAliases>
+        <typeAlias type="www.mybatis.parctise.Entity.Student_Rec" alias="Student_Rec"></typeAlias>
+    </typeAliases>
+
+<!--    使用数据库与Java类型转化-->
+    <typeHandlers>
+        <typeHandler handler="www.mybatis.parctise.handler.DateTypeHandler"></typeHandler>
+    </typeHandlers>
+
+<!--    使用外部插件：分页-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <property name="dialect" value="mysql"/>
+        </plugin>
+    </plugins>
+
+<!--    配置环境-->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="url" value="${jdbc.url}"/>
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+<!--    配置mapper-->
+    <mappers>
+        <mapper resource="./practise/PractiseMapper.xml"></mapper>
+    </mappers>
+
+</configuration>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="www.mybatis.parctise.dao.PractiseDao">
+
+    <!--    使用sql定义公共sql语句-->
+    <sql id="selectStudent">select * from Student_Rec</sql>
+    <sql id="insertStudent">insert into Student_Rec</sql>
+    <sql id="deleteStudent">delete from Student_Rec</sql>
+    <sql id="updateStudent">update Student_Rec set</sql>
+
+    <!--    插入数据-->
+    <insert id="insert" parameterType="Student_Rec">
+        <include refid="insertStudent"/>
+        (name,address,age,time) values (#{name},#{address},#{age},#{time});
+    </insert>
+
+    <!--    删除数据-->
+    <delete id="delete" parameterType="String" >
+        <include refid="deleteStudent"/>
+        where name = #{name};
+    </delete>
+
+    <update id="update" parameterType="Student_Rec">
+        <include refid="updateStudent"/>
+        age = #{age},address = #{address}, time = #{time} where name = #{name};
+    </update>
+
+    <!--    单个查询-->
+    <select id="selectOne" resultType="Student_Rec" parameterType="String">
+        <include refid="selectStudent"/>
+        where name = #{name};
+    </select>
+
+    <!--    if标签实现多条件判断查询-->
+    <select id="selectMore" parameterType="String" resultType="Student_Rec">
+        <include refid="selectStudent"/>
+        <where>
+            <if test="arg0 != null">
+                and name = #{arg0}
+            </if>
+            <if test="arg1 != null">
+                and address = #{arg1}
+            </if>
+        </where>
+    </select>
+
+    <!--    foreach标签查询多个-->
+    <select id="selectMoreWithList" parameterType="List" resultType="Student_Rec">
+        <include refid="selectStudent"/>
+        <where>
+            <foreach collection="list" separator="," item="item" close=")" open="name in(">
+                #{item}
+            </foreach>
+        </where>
+    </select>
+
+    <!--    查询全部-->
+    <select id="selectAll" resultType="Student_Rec">
+        <include refid="selectStudent"/>
+    </select>
+
+</mapper>
+

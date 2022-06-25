@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       https://www.springframework.org/schema/aop/spring-aop.xsd"
+>
+
+    <bean id="pointCut" class="www.aop.Entity.pointCut.PointCutServcieImpl"></bean>
+    <bean id="before" class="www.aop.Entity.pointCut.PointCutBeforeAdvice"></bean>
+    <bean id="after" class="www.aop.Entity.pointCut.PointCutAfterAdvice"></bean>
+    <bean id="interceptor" class="www.aop.Entity.pointCut.PointCutInterceptorAdvice"></bean>
+
+    <aop:config>
+        <!--配置切入点 execution(修饰符 返回值 包.类 方法名 参数表) -->
+        <!-- 1、匹配修饰符 返回值类型 方法名 形参类型-->
+        <aop:pointcut id="insert_1" expression="execution(public java.lang.Integer insert(www.aop.Entity.pointCut.Entity.Person))"/>
+
+        <!-- 2、匹配返回值类型-->
+        <aop:pointcut id="insert_2" expression="execution(java.lang.Integer *(..))"/>
+
+        <!-- 3、匹配方法名称:任意参数-->
+        <aop:pointcut id="insert_3" expression="execution(* insert(..))"/>
+
+        <!-- 4、匹配方法名称：无参-->
+        <aop:pointcut id="selectAll" expression="execution(* selectAll())"/>
+
+        <!-- 5、匹配类名-->
+        <aop:pointcut id="insert_4" expression="execution(* www.aop.Entity.pointCut.PointCutServcieImpl.*(..))"/>
+
+        <!-- 6、匹配包名-->
+        <aop:pointcut id="insert_5" expression="execution(* www.aop.Entity.pointCut.*.*(..))"/>
+
+        <!-- 7、匹配包名、以及子包名-->
+        <aop:pointcut id="insert_6" expression="execution(* www.aop.Entity..*.*(..))"/>
+
+        <!-- 装配测试-->
+        <aop:advisor advice-ref="interceptor" pointcut-ref="insert_6"/>
+
+    </aop:config>
+
+
+</beans>

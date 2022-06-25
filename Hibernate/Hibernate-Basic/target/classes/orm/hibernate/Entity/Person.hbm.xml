@@ -1,0 +1,21 @@
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="orm.hibernate.Entity.Person" table="Hibernate_Person">
+        <id name="id">
+            <column name="pid"/>
+            <generator class="identity"/>
+        </id>
+        <property name="name">
+            <column name="name"/>
+        </property>
+        <property name="address">
+            <column name="address"/>
+        </property>
+        <property name="age">
+            <column name="age"/>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        Spring工厂 单例对象的生命周期：
+            随工厂启动时创建 -> 构造方法 -> set方法（注入值）->init（初始化）-> 构建完成 -> 随工厂关闭（销毁）
+     -->
+    <bean id="lifeCycle" class="www.spring.Entity.LifeCycle" init-method="init_qf">
+        <property name="name" value="张无忌"></property>
+    </bean>
+
+</beans>

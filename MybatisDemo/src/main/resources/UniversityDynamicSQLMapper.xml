@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="www.mybatis.dao.UniversityDynamicSQLDao">
+
+    <!--SQL语句的抽取:抽离sql语句-->
+    <sql id="selectUniversity">select * from University</sql>
+    <!--    动态SQL语句-->
+    <select id="selectOne" parameterType="java.lang.String" resultType="University">
+--         select * from University
+        <include refid="selectUniversity"></include>
+        <where>
+            <if test="arg2 != null">
+                or name = #{arg2}
+            </if>
+            <if test="arg1 != null">
+                or address = #{arg1}
+            </if>
+            <if test="arg0 != null">
+                or level = #{arg0}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectNames" parameterType="java.util.List" resultType="University">
+--         select * from University
+        <include refid="selectUniversity"></include>
+        <where>
+            <foreach collection="list" open="name in(" close=")" item="name" separator=",">
+                #{name}
+            </foreach>
+        </where>
+    </select>
+
+
+</mapper>

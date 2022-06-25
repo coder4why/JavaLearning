@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- 1、通过properties标签，加载外部properties配置文件-->
+    <properties resource="jdbc.properties"></properties>
+
+    <!--2、typeAliases标签（该标签必须配置的properties、settings标签后b）：类型别名是为Java类型设置一个短的名字
+            不能配置interface，可以配置class；
+    -->
+    <typeAliases>
+        <typeAlias type="www.mybatis.Entity.University" alias="University"></typeAlias>
+        <typeAlias type="www.mybatis.Entity.RecordEmp" alias="RecordEmp"></typeAlias>
+    </typeAliases>
+
+<!--    类型转换：实现java Date类型写入到数据为long类型-->
+    <typeHandlers>
+        <typeHandler handler="www.mybatis.typeHandler.DateTypeHandler"></typeHandler>
+    </typeHandlers>
+
+<!--
+    Mybatis标签plugins
+        测试使用分页助手插件pageHelper
+ -->
+    <plugins>
+        <!-- 配置分页插件 -->
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <!-- 设置数据库类型Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库-->
+            <property name="dialect" value="mysql"/>
+        </plugin>
+    </plugins>
+
+    <!--default：设定当前指定默认环境-->
+    <environments default="development">
+        <!--id=development：指定当前环境的名称-->
+        <environment id="development">
+            <!--
+                指定事务管理器类型是JDBC，还有其他类型，如MANAGED；
+                    事务管理器类型：
+                        JDBC：这个配置就是直接使用了JDBC的提交和回滚设置，它依赖于从数据源得到的连接(Connection)来管理事务作用域；
+                        MANAGED：这个配置几乎没做什么，它从来不提交和回滚一个连接，而是让容器来管理事务的整个生命周期，默认情况下它
+                            会关闭连接，然而一些容器并不希望这样，因此需要将closeConnection属性设置为false来阻止它默认的关闭行为！
+            -->
+            <!--
+                数据源（dataSource）类型有三种：
+                    UNPOOLED：这个数据源的实现只是每次被请求时打开和关闭连接；
+                    POOLED：这种数据源的实现利用"池"的概念将JDBC连接对象组织起来；
+                    JNDI：这个数据源的实现是为了能在如EJB或应用服务器这类容器中使用，容器可以集中或在外部配置数据源，然后放置在一个
+                          JNDI上下文的引用；
+            -->
+            <transactionManager type="JDBC"/>
+            <!--数据源：指定当前数据源类型为连接池-->
+            <dataSource type="POOLED">
+                <!-- 数据源的基本配置 -->
+<!--                <property name="driver" value="com.mysql.jdbc.Driver"/>-->
+<!--                <property name="username" value="root"/>-->
+<!--                <property name="password" value="1234"/>-->
+<!--                <property name="url" value="jdbc:mysql://localhost:3306/MySQLDB?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=GMT%2B8&amp;useSSL=false"/>-->
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+                <property name="url" value="${jdbc.url}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--加载 映射 文件-->
+    <mappers>
+<!--
+    加载资源的引用有以下几种方式：
+        resource：使用相对于类路径的资源引用；
+        url：使用完全限定资源定位符（URL）；
+        class：使用映射器接口实现类的完全限定类名；
+        name：将包内的映射器接口实现全部注册为映射器；
+-->
+        <mapper resource="UniversityMapper.xml"/>
+        <mapper resource="UniversityProxyMapper.xml"/>
+        <mapper resource="UniversityDynamicSQLMapper.xml"/>
+        <mapper resource="MybatisTypeHandlerMapper.xml"/>
+
+    </mappers>
+
+</configuration>

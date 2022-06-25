@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--
+     Spring工厂创建后，会将Spring配置文件中的所有对象都创建完成（饿汉式）；
+     提高程序运行效率，避免多次IO，减少对象创建时间。（概念接近连接池，一次性创建好，使用时直接获取）
+-->
+
+<!--   1、Spring Set注入-->
+        <bean id="animal" class="www.spring.Entity.Animal">
+            <property name="age" value="20"></property>
+            <property name="bornDate" value="2020/12/12 10:10:01"></property>
+            <property name="name" value="小可爱"></property>
+            <property name="phones">
+                <set>
+                    <value>13456864167</value>
+                    <value>17891919801</value>
+                    <value>15971902073</value>
+                </set>
+            </property>
+            <property name="names">
+                <list>
+                    <value>终南山</value>
+                    <value>袁隆平</value>
+                    <value>钱学森</value>
+                </list>
+            </property>
+            <property name="files">
+                <map>
+                    <entry key="day" value="2020-10-01"/>
+                    <entry key="week" value="星期一"/>
+                    <entry key="time" value="10:01:01"/>
+                </map>
+            </property>
+            <property name="countries">
+                <map>
+                    <entry key="CN" value="中国"/>
+                    <entry key="UN" value="英国"/>
+                    <entry key="US" value="美国"/>
+                </map>
+            </property>
+            <property name="hobbys">
+                <set>
+                    <value>台球</value>
+                    <value>唱歌</value>
+                    <value>旅行</value>
+                </set>
+            </property>
+        </bean>
+
+        <bean id="school" class="www.spring.Entity.School">
+            <property name="name" value="科比布莱恩特"></property>
+            <property name="bornDate" value="1990/01/01 10:10:10"></property>
+            <property name="age" value="35"></property>
+        </bean>
+<!--    2、Spring constructor注入-->
+    <bean id="school1" class="www.spring.Entity.School">
+        <constructor-arg name="age" value="10"/>
+        <constructor-arg name="bornDate" value="2020/12/12 10:10:10"/>
+        <constructor-arg name="name" value="小老板"/>
+    </bean>
+
+<!--    3、Spring自动注入-->
+    <bean id="autoWriteSet" class="www.spring.SpringFactory.PractiseFactory" autowire="byName"></bean>
+
+</beans>

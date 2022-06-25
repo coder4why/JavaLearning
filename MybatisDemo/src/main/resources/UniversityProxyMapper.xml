@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    1、使用Mybatis代理模式，实现DAO操作，定义interface，Mapper.xml文件指定 namespace为协议路径，id为协议方法名称，即可
+       注意：
+           namespace：指定java协议文件；
+           id：指定方法名称与interface协议方法名称一致；
+           parameterType：指定参数类型与interface协议参数类型一致；
+           resultType：指定返回参数类型与interface协议返回参数类型一致；
+-->
+<mapper namespace="www.mybatis.dao.UniversityMybatisDao">
+
+    <insert id="insert" parameterType="University">
+        insert into University(name,address,level,studentsCount,teachersCount)values
+        (#{name},#{address},#{level},#{studentsCount},#{teachersCount});
+    </insert>
+
+    <delete id="delete" parameterType="String">
+        delete from University where name = #{name};
+    </delete>
+
+    <update id="update" parameterType="University">
+        update University set address= #{address},level = #{level},studentsCount= #{studentsCount},teachersCount= #{teachersCount} where name = #{name};
+    </update>
+
+    <select id="selectOne" parameterType="String" resultType="University">
+        select * from University where name = #{name};
+    </select>
+
+    <select id="selectAll" resultType="University">
+        select * from University;
+    </select>
+
+</mapper>

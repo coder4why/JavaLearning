@@ -1,0 +1,32 @@
+{
+  "groups": [
+    {
+      "name": "jdbc",
+      "type": "www.bootSpring.JdbcProperties",
+      "sourceType": "www.bootSpring.JdbcProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "jdbc.driver",
+      "type": "java.lang.String",
+      "sourceType": "www.bootSpring.JdbcProperties"
+    },
+    {
+      "name": "jdbc.password",
+      "type": "java.lang.String",
+      "sourceType": "www.bootSpring.JdbcProperties"
+    },
+    {
+      "name": "jdbc.url",
+      "type": "java.lang.String",
+      "sourceType": "www.bootSpring.JdbcProperties"
+    },
+    {
+      "name": "jdbc.username",
+      "type": "java.lang.String",
+      "sourceType": "www.bootSpring.JdbcProperties"
+    }
+  ],
+  "hints": []
+}

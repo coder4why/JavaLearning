@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       https://www.springframework.org/schema/aop/spring-aop.xsd"
+>
+
+    <bean id="practiseService" class="www.aop.Entity.practise.PractiseServiceImpl"></bean>
+    <bean id="before" class="www.aop.Entity.practise.PractiseBeforeAdvice"></bean>
+    <bean id="after" class="www.aop.Entity.practise.PractiseAfterAdvice"></bean>
+    <bean id="interceptor" class="www.aop.Entity.practise.PractiseInterceptorAdvice"></bean>
+
+    <aop:config>
+        <aop:pointcut id="practise_insert" expression="execution(* insertInfo())"/>
+        <aop:pointcut id="practise_delete" expression="execution(* deleteInfo())"/>
+        <aop:pointcut id="practise_update" expression="execution(* updateInfo())"/>
+        <aop:pointcut id="practise_query" expression="execution(* queryInfo())"/>
+
+        <aop:advisor advice-ref="before" pointcut-ref="practise_insert"/>
+        <aop:advisor advice-ref="before" pointcut-ref="practise_delete"/>
+        <aop:advisor advice-ref="before" pointcut-ref="practise_update"/>
+        <aop:advisor advice-ref="before" pointcut-ref="practise_query"/>
+
+        <aop:advisor advice-ref="after" pointcut-ref="practise_insert"/>
+        <aop:advisor advice-ref="after" pointcut-ref="practise_delete"/>
+        <aop:advisor advice-ref="after" pointcut-ref="practise_update"/>
+        <aop:advisor advice-ref="after" pointcut-ref="practise_query"/>
+
+        <aop:advisor advice-ref="interceptor" pointcut-ref="practise_insert"/>
+        <aop:advisor advice-ref="interceptor" pointcut-ref="practise_delete"/>
+        <aop:advisor advice-ref="interceptor" pointcut-ref="practise_update"/>
+        <aop:advisor advice-ref="interceptor" pointcut-ref="practise_query"/>
+
+    </aop:config>
+
+</beans>

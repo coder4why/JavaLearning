@@ -1,0 +1,28 @@
+
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+
+        <!--数据库连接-->
+        <property name="connection.url">jdbc:mysql://localhost:3306/MySQLDB?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;serverTimezone=GMT%2B8</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">1234</property>
+
+        <!--配置选项-->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <!--是否在控制台显示输出SQL语句-->
+        <property name="show_sql">true</property>
+
+        <!--配置映射文件类的两种方式：-->
+<!--        <mapping class="orm.hibernate.Entity.Person"/>-->
+        <!--1、使用注解来映射-->
+        <mapping class="orm.hibernate.Entity.Student"/>
+        <!--2、使用xml文件来映射-->
+        <mapping resource="orm/hibernate/Entity/Person.hbm.xml"/>
+
+    </session-factory>
+</hibernate-configuration>

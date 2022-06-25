@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="www.dao.UserMapper">
+
+    <sql id="selectUser">select * from User</sql>
+
+    <resultMap id="selectOneUser" type="www.Entity.User">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="uid" column="uid"/>
+        <collection property="orders" ofType="www.Entity.Order">
+            <id property="id" column="id"/>
+            <result property="uid" column="uid"/>
+            <result property="order_id" column="order_id"/>
+        </collection>
+    </resultMap>
+    <select id="selectOne" parameterType="String" resultMap="selectOneUser">
+        select * from User as u,Orders as o where u.uid = o.user_id and u.uid = #{uid};
+    </select>
+
+    <resultMap id="selectAllUserOrders" type="www.Entity.User">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <collection property="orders" ofType="www.Entity.Order">
+            <id property="id" column="id"/>
+            <result property="order_id" column="order_id"/>
+            <result property="uid" column="uid"/>
+        </collection>
+    </resultMap>
+    <select id="selectAll" resultMap="selectAllUserOrders">
+        <include refid="selectUser"/> as u,Orders as o where u.uid = o.order_id;
+    </select>
+
+</mapper>

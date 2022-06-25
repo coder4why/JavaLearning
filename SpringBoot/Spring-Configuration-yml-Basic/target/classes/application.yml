@@ -1,0 +1,17 @@
+person:
+  name: 姚明
+  age: 30
+  city: 上海
+  hobbit: 篮球
+  job: 中国篮协主席
+
+student:
+  name: 大张伟
+  age: 33
+  city: 湖南长沙
+  job: 歌手
+
+#激活其他的application-*.yml文件；
+#spring:
+#  profiles:
+#    active: a,b

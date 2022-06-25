@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="student" class="www.spring.Entity.Student">
+        <property name="name" value="上海市"></property>
+        <property name="age" value="20"></property>
+        <property name="bornDate" value="2020/10/02 12:00:00"></property>
+    </bean>
+    <bean id="teacher" class="www.spring.Entity.Teacher">
+        <property name="name" value="张老三"></property>
+        <property name="age" value="50"></property>
+    </bean>
+
+    <!--Spring IoC -->
+    <!-- 1.Set注入 -->
+    <bean id="student1" class="www.spring.Entity.Student">
+        <property name="age" value="10"></property>
+        <property name="name" value="张老三"></property>
+        <property name="bornDate" value="2020/10/01 10:00:10"></property>
+        <property name="hobbys">
+            <array>
+                <value>足球</value>
+                <value>篮球</value>
+                <value>斯诺克</value>
+            </array>
+        </property>
+        <property name="countries">
+            <map>
+                <entry key="ZH" value="中国"></entry>
+                <entry key="UN" value="美国"></entry>
+            </map>
+        </property>
+        <property name="files">
+           <props>
+               <prop key="url">jdbc:mysql:xxxx</prop>
+               <prop key="username">root</prop>
+               <prop key="password">1234</prop>
+           </props>
+        </property>
+        <property name="names">
+            <list>
+                <value>科比-布莱恩特</value>
+                <value>詹姆斯</value>
+                <value>保罗皮尔斯</value>
+            </list>
+        </property>
+        <property name="phones">
+            <set>
+                <value>17891919801</value>
+                <value>13456864167</value>
+                <value>15971902073</value>
+            </set>
+        </property>
+    </bean>
+    <!-- 2.构造注入
+        public Teacher(String name, Integer age, Date bornDate){
+           this.name = name;
+           this.age = age;
+           this.bornDate = bornDate;
+       }
+    -->
+<!--    构造注入-->
+    <bean id="teacher1" class="www.spring.Entity.Teacher">
+        <constructor-arg name="age" value="10"/>
+        <constructor-arg name="bornDate" value="2020/12/12 10:10:10"/>
+        <constructor-arg name="name" value="习大大"/>
+    </bean>
+
+<!--    Set注入-->
+    <bean id="iocFactory" class="www.spring.SpringFactory.IocFactory">
+        <property name="student" ref="student1"></property>
+        <property name="teacher" ref="teacher1"></property>
+    </bean>
+
+    <!--
+        3.自动注入:
+            byName:从当前xml文件中读取bean标签对象，与class类的属性对比，如果是类型和名称相同的属性，则自动赋值；
+            byType:从当前xml文件中读取bean标签对象，与class类的属性对比，如果是类型相同的属性，则自动赋值；
+    -->
+    <bean id="autoFactory" class="www.spring.SpringFactory.IocFactory" autowire="byName"></bean>
+
+
+</beans>

@@ -1,0 +1,12 @@
+person:
+  name: 姚明1
+  age: 31
+  city: 上海1
+  hobbit: 篮球1
+  job: 中国篮协主席1
+
+student:
+  name: 大张伟1
+  age: 34
+  city: 湖南长沙1
+  job: 歌手1

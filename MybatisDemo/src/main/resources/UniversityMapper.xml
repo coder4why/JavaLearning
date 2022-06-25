@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="university">
+<!--
+        1、参数类型或者返回值类型为实体类（如：www.mybatis.Entity.University），
+        使用sqlMapperConfig.xml文件typeAliases标签配置的类型别名(University);
+-->
+<!--    2、Mybatis #{value} ：value传人的是实体属性的名称-->
+<!--    增-->
+    <insert id="insert" parameterType="University" useGeneratedKeys="true">
+        insert into University(name,address,level,studentsCount,teachersCount)values(#{name},#{address},#{level},#{studentsCount},#{teachersCount});
+    </insert>
+<!--    删-->
+    <delete id="delete" parameterType="java.lang.String">
+        delete from University where name = #{name};
+    </delete>
+<!--    改-->
+    <update id="update" parameterType="University" useGeneratedKeys="true">
+        update University set address = #{address},level = #{level}, studentsCount = #{studentsCount} , teachersCount = #{teachersCount} where name = #{name} ;
+    </update>
+<!--    查-->
+    <select id="selectUniversity" parameterType="java.lang.String" resultType="University">
+        select * from University where name = #{name};
+    </select>
+<!--    查所有-->
+    <select id="selectAll" resultType="University">
+        select * from University;
+    </select>
+
+</mapper>
